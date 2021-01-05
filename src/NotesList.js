@@ -8,12 +8,10 @@ function NotesList(props) {
  
  let i = 0;
  let items = [];
-//  localStorage.clear();
  for (i ;i<localStorage.length;i++){
     items.push(localStorage.key(i));
 }
   function toggleActiveNote(event){
-    console.log('aaa');
       if (document.querySelector('.active') != null)
         document.querySelector('.active').setAttribute('class','');
       event.target.setAttribute('class','active')
