@@ -17,7 +17,7 @@ export class NotesSelector extends Component {
 
     render() {
         return (
-            <div value = {this.state.title}>
+            <div className = "noteName" onClick = {this.props.toggleActiveNote} value = {this.state.title}>
                 {this.state.title}
             </div>
         )
