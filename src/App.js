@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <NotesList useReload = {useReload} reload={reload} className = "notesList" setActiveNote={setActiveNote} />
-      <NotesContent useReload = {useReload} reload={reload} className = "notesContent" activeNote={activeNote} />
+      <NotesContent useReload = {useReload} reload={reload} className = "notesContent" activeNote={activeNote} setActiveNote={setActiveNote} />
     </div>
   );
 }
