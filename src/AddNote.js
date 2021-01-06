@@ -29,9 +29,9 @@ export class AddNote extends Component {
     
     render() {
         return (
-            <div>
+            <div className = "addButton">
                 <input type = 'text' placeholder = "New note title" onChange = {this.handleInput} />
-                <button onClick = {this.addNewNote}>Add note!</button>
+                <button  onClick = {this.addNewNote}>+</button>
             </div>
         )
     }
