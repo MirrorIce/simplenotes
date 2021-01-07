@@ -22,6 +22,10 @@ function NotesContent(props) {
         localStorage.removeItem(props.activeNote);
 
     }
+    function removeNote(event){
+        localStorage.removeItem(props.activeNote);
+        props.setActiveNote(localStorage.key(0));
+    }
     useEffect(() =>{
         if (document.querySelector('.noteInput')!=null){
             setContent(localStorage.getItem(props.activeNote));
@@ -36,6 +40,7 @@ function NotesContent(props) {
     return (
         <div className = 'notesContent'>
             <input onChange={editTitle} type="text" value={title}></input>
+            <button onClick={removeNote} >X</button>
             {(props.activeNote !='')&&<textarea className='noteInput' onChange={saveNote} value={content}></textarea>}
         </div>
     )
