@@ -4,8 +4,7 @@ html,body,#root{
   background:lightgray;
 }
 .App {
-  width:80%;
-  margin:0 auto;
+  width:90%;
   margin-top:10px;
   display:flex;
   flex-direction:horizontal;
@@ -46,6 +45,7 @@ html,body,#root{
   text-align:right;
   margin-right:0;
   margin-left:auto;
+  min-width:110px;
 }
 .addButton input{
   width:10px;
