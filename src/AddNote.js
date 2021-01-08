@@ -18,8 +18,11 @@ export class AddNote extends Component {
 
     addNewNote(event){
         if (localStorage.getItem(this.state.newNoteTitle) === null){
-            localStorage.setItem(this.state.newNoteTitle,'');
-            this.props.callback(!this.props.value);
+            if (this.state.newNoteTitle != ''){
+                localStorage.setItem(this.state.newNoteTitle,'');
+                this.props.callback(!this.props.value);
+            }
+            
         } 
         else{
             console.log(this.state.newNoteTitle);
