@@ -40,7 +40,7 @@ function NotesContent(props) {
     return (
         <div className = 'notesContent'>
             <input onChange={editTitle} type="text" value={title}></input>
-            <button onClick={removeNote} >X</button>
+            <button className="deleteButton" onClick={removeNote} >X</button>
             {(props.activeNote !='')&&<textarea className='noteInput' onChange={saveNote} value={content}></textarea>}
         </div>
     )
