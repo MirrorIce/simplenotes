@@ -79,6 +79,19 @@ html,body,#root{
   flex-shrink: 40;
 }
 
+.notesContent .deleteButton{
+  border:1px solid red;
+  padding:10px;
+  background:var(--note-bg);
+  border-radius:0px 15px 0px 0px;
+  transition:.2s ease all;
+}
+
+.notesContent .deleteButton:hover{
+  background:red;
+  color:white;
+}
+
 .notesContent textarea{
   width:99%;
   height:85%;
@@ -94,7 +107,7 @@ html,body,#root{
 .notesContent input{
   border-top:1px solid lightcoral;
   background:var(--note-bg);
-  border-radius:5px 5px 0px 0px;
+  border-radius:15px 0px 0px 0px;
 }
 
 .notesContent input:active{
@@ -108,4 +121,5 @@ html,body,#root{
   background:var(--note-bg);
   resize:none;
 }
+
 
