@@ -4,7 +4,7 @@ html,body,#root{
   background:lightgray;
 }
 .App {
-  width:70%;
+  width:80%;
   margin:0 auto;
   margin-top:10px;
   display:flex;
@@ -48,35 +48,46 @@ html,body,#root{
   margin-left:auto;
 }
 .addButton input{
-  width:60px;
-  padding:5px;
+  width:10px;
+  padding:10px;
   border-radius:5px 0px 0px 5px;
   border:1px solid #8aff58 ;
   border-right:none;
   margin-top:5px;
   background:var(--note-bg);
   outline:none;
+  transition:.4s ease width;
 }
+
+.addButton input:focus{
+  width:60px;
+}
+
 .addButton button{
-  padding:5px;
+  padding:10px;
+  padding-right:15px;
   border:none;
   border:1px solid #8aff58 ;
   border-left:none;
   background:var(--note-bg);
   width:20px;
+  transition:.2s ease background;
 }
 
-.notesList{
-  flex-basis:1;
-  flex-grow:1;
-  flex-shrink:1;
+.addButton button:hover{
+  background:#8aff58;
+}
+
+.notesList{ 
+  padding:0;
+  flex-basis: 1;
+  flex-grow: 1;
   margin-top:40px;
 }
 
 .notesContent{
-  flex-basis:40;
-  flex-grow:40;
-  flex-shrink: 40;
+  flex-basis:1;
+  flex-grow:10;
 }
 
 .notesContent .deleteButton{
