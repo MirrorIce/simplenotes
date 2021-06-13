@@ -8,7 +8,7 @@ export class NotesSelector extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps){
+    componentDidUpdate(nextProps){
         const { title } = nextProps;
         if(title !== this.state.title) {
             this.setState({title});

@@ -17,16 +17,41 @@ export class AddNote extends Component {
     }
 
     addNewNote(event){
-        if (localStorage.getItem(this.state.newNoteTitle) === null){
-            if (this.state.newNoteTitle != ''){
-                localStorage.setItem(this.state.newNoteTitle,'');
-                this.props.callback(!this.props.value);
+        let simpleNotes = localStorage.getItem('simplenotes');
+        let newNoteTitle = this.state.newNoteTitle;
+        if ( simpleNotes === null )
+        {
+            localStorage.setItem('simplenotes',JSON.stringify([{noteTitle:newNoteTitle,noteValue:''}]));
+        }
+        else
+        {
+            let isFound = 0;
+            simpleNotes = JSON.parse(simpleNotes);
+            console.log(simpleNotes);
+            for (let i = 0; i < simpleNotes.length; i++)
+            {
+                
+                if (newNoteTitle === simpleNotes[i].noteTitle)
+                {
+                    isFound = 1;
+                }
             }
-            
-        } 
-        else{
-            console.log(this.state.newNoteTitle);
-            alert('Note found! '+ this.state.newNoteTitle);
+            if (!isFound)
+            {
+                if (this.state.newNoteTitle !=='')
+                {
+                    simpleNotes.push({noteTitle:newNoteTitle,noteValue:''});
+                    localStorage.setItem('simplenotes',JSON.stringify(simpleNotes));
+                }
+                else
+                {
+                    alert("Cannot add an empty note name!")
+                }
+            }
+            else
+            {
+                alert("Note "+this.state.newNoteTitle+" duplicate found!");
+            }
         }
     }
     
