@@ -9,7 +9,8 @@ export class AddNote extends Component {
 
         this.handleInput = this.handleInput.bind(this);
         this.addNewNote = this.addNewNote.bind(this);
-        this.useReload = this.props.callback(this);
+        this.useReload =  this.props.callback.bind(this);
+
     }
 
     handleInput(event){
@@ -42,6 +43,7 @@ export class AddNote extends Component {
                 {
                     simpleNotes.push({noteTitle:newNoteTitle,noteValue:''});
                     localStorage.setItem('simplenotes',JSON.stringify(simpleNotes));
+                    this.useReload(!this.props.value);
                 }
                 else
                 {

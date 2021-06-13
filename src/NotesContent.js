@@ -57,8 +57,9 @@ function NotesContent(props) {
                     }
                     else
                     {
-                        props.setActiveNote(JSON.parse(localStorage.getItem('simplenotes'))[0].noteTitle);
-                    }
+                        props.setActiveNote('');
+                       }
+                    props.useReload(!props.reload);
                 }
             }    
         }
