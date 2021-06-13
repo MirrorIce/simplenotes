@@ -48,17 +48,8 @@ function NotesContent(props) {
                 if (simpleNotes[i].noteTitle === props.activeNote)
                 {
                     simpleNotes.splice(i,1);
-                    console.log(simpleNotes);
                     localStorage.setItem('simplenotes',JSON.stringify(simpleNotes));
-                    
-                    if (0 === simpleNotes.length)
-                    {
-                        props.setActiveNote('');
-                    }
-                    else
-                    {
-                        props.setActiveNote('');
-                       }
+                    props.setActiveNote('');
                     props.useReload(!props.reload);
                 }
             }    
@@ -86,6 +77,7 @@ function NotesContent(props) {
             else
             {
                 setContent('');
+                setTitle('');
             }
         }   
     },[props.activeNote]);

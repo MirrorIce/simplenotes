@@ -8,10 +8,10 @@ export class NotesSelector extends Component {
         }
     }
 
-    componentDidUpdate(nextProps){
-        const { title } = nextProps;
-        if(title !== this.state.title) {
-            this.setState({title});
+    componentDidUpdate(prevProps){
+        if (prevProps.title !== this.props.title)
+        {
+            this.setState({title:this.props.title});
         }
     }
 

@@ -28,7 +28,6 @@ export class AddNote extends Component {
         {
             let isFound = 0;
             simpleNotes = JSON.parse(simpleNotes);
-            console.log(simpleNotes);
             for (let i = 0; i < simpleNotes.length; i++)
             {
                 

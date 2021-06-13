@@ -22,14 +22,14 @@ function NotesList(props) {
       items = JSON.parse(simpleNotes);
       setNoteItems(items);
     }
-  });
+  },[props.reload]);
   return (
     <ul className="notesList">
-        {noteItems.map((value,index) =>{
-            lastIndex = index;
-            return <li className="noteSelector" key = {index}><NotesSelector toggleActiveNote={toggleActiveNote} title={value.noteTitle}  /></li>
-        })}
         <AddNote callback={props.useReload} value = {props.reload} key = {lastIndex} />
+        {noteItems.map((value,index) =>{console.log("AAA "+value.noteTitle);
+            lastIndex = index;
+            return <li className="noteSelector" key = {index}><NotesSelector key = {index} toggleActiveNote={toggleActiveNote} title={value.noteTitle}  /></li>
+        })}
     </ul>
   );
 }
