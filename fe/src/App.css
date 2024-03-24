@@ -1,0 +1,136 @@
+html,body,#root{
+  height:99%;
+  --note-bg: rgb(220, 220, 220);
+  background:lightgray;
+}
+.App {
+  width:90%;
+  margin-top:10px;
+  display:flex;
+  flex-direction:horizontal;
+  align-items:stretch;
+  height:100%;
+  filter:drop-shadow(0px 30px 20px rgba(80,80,80,0.2));
+}
+
+.noteSelector{
+  text-decoration:none;
+  list-style-type: none;
+  margin-top:1px;
+}
+
+.noteSelector div{
+  text-align:right;
+  border-top:3px solid #52cb1f;
+  background:var(--note-bg);
+  padding:5px;
+  width:fit-content;
+  min-width:60px;
+  margin-right:0;
+  margin-left:auto;
+  border-radius:5px 0px 0px 5px;
+  border-right:1px inset lightgray;
+}
+
+.noteSelector .active{
+  background:lightgray;
+  box-shadow: 0px 10px 20px 0px rgba(0, 70, 6, 0.4);
+  margin-bottom:10px;
+  margin-top:5px;
+  transition:.2s ease all;
+  border:none;
+}
+
+.addButton{
+  text-align:right;
+  margin-right:0;
+  margin-left:auto;
+  min-width:110px;
+}
+.addButton input{
+  width:10px;
+  padding:10px;
+  border-radius:5px 0px 0px 5px;
+  border:1px solid #8aff58 ;
+  border-right:none;
+  margin-top:5px;
+  background:var(--note-bg);
+  outline:none;
+  transition:.4s ease width;
+}
+
+.addButton input:focus{
+  width:60px;
+}
+
+.addButton button{
+  padding:10px;
+  padding-right:15px;
+  border:none;
+  border:1px solid #8aff58 ;
+  border-left:none;
+  background:var(--note-bg);
+  width:20px;
+  transition:.2s ease background;
+}
+
+.addButton button:hover{
+  background:#8aff58;
+}
+
+.notesList{ 
+  padding:0;
+  flex-basis: 1;
+  flex-grow: 1;
+  margin-top:40px;
+}
+
+.notesContent{
+  flex-basis:1;
+  flex-grow:10;
+}
+
+.notesContent .deleteButton{
+  border:1px solid red;
+  padding:10px;
+  background:var(--note-bg);
+  border-radius:0px 15px 0px 0px;
+  transition:.2s ease all;
+}
+
+.notesContent .deleteButton:hover{
+  background:red;
+  color:white;
+}
+
+.notesContent textarea{
+  width:99%;
+  height:85%;
+
+}
+
+.notesContent input, .notesContent textarea{
+  padding:10px;
+  border:none;
+  outline:none;
+}
+
+.notesContent input{
+  border-top:1px solid lightcoral;
+  background:var(--note-bg);
+  border-radius:15px 0px 0px 0px;
+}
+
+.notesContent input:active{
+  border:none;
+}
+
+.notesContent textarea{
+  border-radius:0px 25px 25px 10px;
+  border-top:1px solid green;
+  border-bottom:1px solid green;
+  background:var(--note-bg);
+  resize:none;
+}
+
+
