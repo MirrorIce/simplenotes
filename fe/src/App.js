@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import './App.css';
-import NotesList from './NotesList.js';
-import NotesContent from './NotesContent.js'
+import './style/App.css';
+import NotesList from './components/NotesList.js';
+import NotesContent from './components/NotesContent.js'
 
 function App() {
   const [activeNote,setActiveNote] = useState('');

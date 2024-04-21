@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import './style/NotesList.css';
+import '../style/NotesList.css';
 import AddNote from './AddNote';
 
 import { NotesSelector } from './NotesSelector';
