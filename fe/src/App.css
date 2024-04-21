@@ -51,7 +51,7 @@ html,body,#root{
   width:10px;
   padding:10px;
   border-radius:5px 0px 0px 5px;
-  border:1px solid #8aff58 ;
+  border:1px solid green;
   border-right:none;
   margin-top:5px;
   background:var(--note-bg);
@@ -67,7 +67,7 @@ html,body,#root{
   padding:10px;
   padding-right:15px;
   border:none;
-  border:1px solid #8aff58 ;
+  border:1px solid green;
   border-left:none;
   background:var(--note-bg);
   width:20px;
@@ -75,7 +75,7 @@ html,body,#root{
 }
 
 .addButton button:hover{
-  background:#8aff58;
+  background:green;
 }
 
 .notesList{ 
@@ -91,13 +91,14 @@ html,body,#root{
 }
 
 .notesContent .deleteButton{
-  border:1px solid red;
   padding:10px;
   background:var(--note-bg);
   border-radius:0px 15px 0px 0px;
   transition:.2s ease all;
 }
-
+.deleteButton{
+  border:1px solid red;
+}
 .notesContent .deleteButton:hover{
   background:red;
   color:white;
@@ -105,8 +106,7 @@ html,body,#root{
 
 .notesContent textarea{
   width:99%;
-  height:85%;
-
+  height:89vh;
 }
 
 .notesContent input, .notesContent textarea{
@@ -116,7 +116,6 @@ html,body,#root{
 }
 
 .notesContent input{
-  border-top:1px solid lightcoral;
   background:var(--note-bg);
   border-radius:15px 0px 0px 0px;
 }
