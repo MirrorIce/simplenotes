@@ -3,8 +3,12 @@
 # dependencies
 /**/node_modules
 /.pnp
+be/obj
 .pnp.js
 .vscode
+/**/bin
+/**/obj
+/**/.vs
 # testing
 /coverage
 
@@ -21,3 +25,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+be/appsettings.json
