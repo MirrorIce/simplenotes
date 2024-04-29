@@ -1,9 +1,11 @@
-import{ useState } from 'react'
-
+import{ useState, useContext } from 'react'
+import { ControllersContext } from '../App';
+import ContextModel from '../models/ContextModel';
 
 function AddNote(props)
 {
     let [newNoteTitle, setNewNoteTitle] = useState<string>('');
+    let controllerContext = useContext<ContextModel>(ControllersContext);
 
     function handleInput(event)
     {
@@ -12,41 +14,10 @@ function AddNote(props)
 
     function addNewNote(event)
     {
-        let simpleNotes : any = localStorage.getItem('simpleNotes');
-        setNewNoteTitle(event.target.value);
-        if (simpleNotes == null)
+        let result = controllerContext._noteController.addNote(newNoteTitle);
+        if (result === 0)
         {
-            localStorage.setItem('simplenotes', JSON.stringify([{noteTitle: newNoteTitle, noteValue:""}]));
-        }
-        else
-        {
-            let isFound : boolean = false;
-            let parsedSimpleNotes : any = JSON.parse(simpleNotes);
-            for (let element  in parsedSimpleNotes)
-            {
-                if (newNoteTitle === element["noteTitle"])
-                {
-                    isFound = true;
-                    break;
-                }    
-            }
-            if (!isFound)
-            {
-                if (newNoteTitle != "")
-                {
-                    parsedSimpleNotes.push({noteTitle: newNoteTitle, noteValue: ""});
-                    localStorage.setItem('simplenotes', JSON.stringify(parsedSimpleNotes));
-                    props.useReload(!this.props.value);
-                }
-                else
-                {
-                    alert("Cannot add an emty note!");
-                }
-            }
-            else
-            {
-                alert("Note "+this.state.newNoteTitle+" duplicate found!");
-            }
+            props.callback(!props.value);
         }
     }
 

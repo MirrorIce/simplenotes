@@ -1,91 +1,79 @@
-import {useState,useEffect} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useState,useEffect, useContext} from 'react';
+import { ActiveNoteContext, ControllersContext } from '../App';
+import ContextModel from '../models/ContextModel';
 
 function NotesContent(props) {
     let [title,setTitle] = useState<string>('');
     let [content,setContent] = useState<string>('');
+    let controllerContext = useContext<ContextModel>(ControllersContext);
+    let activeNoteIdContext = useContext(ActiveNoteContext);
 
     function saveNote(event){
-        if (props.activeNote !== '')
+        if (activeNoteIdContext.activeNoteId !== -1)
         {
-        setContent(event.target.value);
-        let simpleNotes = JSON.parse(localStorage.getItem('simplenotes'));
-        for (let i = 0; i < simpleNotes.length; i++)
-        {
-            if (simpleNotes[i].noteTitle === props.activeNote)
-            {
-                simpleNotes[i].noteValue = event.target.value;
-            }
-        }
-        localStorage.setItem('simplenotes', JSON.stringify(simpleNotes));
+            let noteToEdit = controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+            setContent(event.target.value);
+            noteToEdit.noteContent = event.target.value;
+            controllerContext._noteController.saveNote(noteToEdit);
         }        
         else
         {
             alert("No note was selected!");
         }
     }
+
     function editTitle(event){
         setTitle(event.target.value);
-        let simpleNotes = JSON.parse(localStorage.getItem('simplenotes'));
-        for (let i = 0; i < simpleNotes.length; i++)
-        {
-            if (simpleNotes[i].noteTitle === props.activeNote)
-            {
-                simpleNotes[i].noteTitle = event.target.value;
-            }
-        }
-        localStorage.setItem('simplenotes', JSON.stringify(simpleNotes))
-        props.setActiveNote(event.target.value);
-        // localStorage.removeItem(props.activeNote);
-
+        let noteToEdit =  controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+        noteToEdit.noteTitle = event.target.value;
+        controllerContext._noteController.saveNote(noteToEdit);
     }
+
     function removeNote(event){
-        let simpleNotes = JSON.parse(localStorage.getItem('simplenotes'));
-        if (simpleNotes != null && props.activeNote !== '')
+        if (activeNoteIdContext.activeNoteId === -1)
         {
-            
-            for (let i = 0; i < simpleNotes.length; i++)
-            {
-                if (simpleNotes[i].noteTitle === props.activeNote)
-                {
-                    simpleNotes.splice(i,1);
-                    localStorage.setItem('simplenotes',JSON.stringify(simpleNotes));
-                    props.setActiveNote('');
-                    props.useReload(!props.reload);
-                }
-            }    
+            alert("No notes selected!");
+            return;
         }
-        else
+        let noteToDelete = controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+        if (noteToDelete == null)
         {
-            alert("Invalid deletion!");
+            alert("Error: could not find note to delete!");
+            return;
         }
-
+        controllerContext._noteController.deleteNote(noteToDelete);
+        activeNoteIdContext.setActiveNoteId(-1);
+        props.useReload(!props.reload);
     }
+
     useEffect(() =>{
         if (document.querySelector('.noteInput')!=null){
-            let simpleNotes = JSON.parse(localStorage.getItem('simplenotes'));
-            if (simpleNotes != null && props.activeNote !== '')
+            if (activeNoteIdContext.activeNoteId !== -1)
             {
-                for (let i = 0; i < simpleNotes.length; i++)
+                let note = controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+                if (note === null)
                 {
-                    if (simpleNotes[i].noteTitle === props.activeNote)
-                    {
-                        setContent(simpleNotes[i].noteValue);
-                    }
+                    setTitle("");
+                    setContent("");
+                    return;
                 }
-                setTitle(props.activeNote);
+                setTitle(note.noteTitle);
+                setContent(note.noteContent);
             }
             else
             {
-                setContent('');
-                setTitle('');
+                setTitle("");
+                setContent("");
             }
         }   
-    },[props.activeNote]);
+    },[activeNoteIdContext.activeNoteId]);
+
     return (
         <div className = 'notesContent'>
             <input onChange={editTitle} type="text" value={title}></input>
             <button className="deleteButton" onClick={removeNote} >X</button>
-            {(props.activeNote !== '')&&<textarea className='noteInput' onChange={saveNote} value={content}></textarea>}
+            {(activeNoteIdContext.activeNoteId !== -1)&&<textarea className='noteInput' onChange={saveNote} value={content}></textarea>}
         </div>
     )
 }

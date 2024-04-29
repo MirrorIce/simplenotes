@@ -1,19 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
+import { ActiveNoteContext } from '../App';
 
 
 function NotesSelector(props){
-    let [title, setTitle] = useState<string>('');
+    let activeNoteContext = useContext(ActiveNoteContext);   
 
-    useEffect(() => {
-        if (title !== props.title)
+    function toggleActiveNote(event)
+    {
+        activeNoteContext.setActiveNoteId(props.noteId);
+        let removeActive = document.querySelector('.active');
+        if (removeActive !== null)
         {
-            setTitle(props.title);
+            removeActive.setAttribute('class','');
         }
-    }, [title, props.title])
+        event.target.setAttribute('class','active');
+    }
 
     return (
-     <div className = "noteName" onClick = {props.toggleActiveNote} key = {title}>
-       {title}
+     <div className = "noteName" onClick = {toggleActiveNote} key = {props.title}>
+       {props.title}
      </div>
     )
 }
