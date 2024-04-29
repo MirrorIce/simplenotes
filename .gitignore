@@ -11,7 +11,7 @@ be/obj
 /**/.vs
 # testing
 /coverage
-
+/**/dist
 # production
 /build
 

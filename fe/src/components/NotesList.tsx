@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import '../style/NotesList.css';
 import AddNote from './AddNote';
 
-import { NotesSelector } from './NotesSelector';
+import NotesSelector from './NotesSelector';
 
 function NotesList(props) {
  
@@ -11,7 +11,7 @@ function NotesList(props) {
       if (document.querySelector('.active') != null)
         document.querySelector('.active').setAttribute('class','');
         event.target.setAttribute('class','active')
-        props.setActiveNote(event.target.getAttribute('value'));
+        props.setActiveNote(event.target.textContent);
   }
   let lastIndex = 0;
   useEffect(() =>{
@@ -28,7 +28,11 @@ function NotesList(props) {
         <AddNote callback={props.useReload} value = {props.reload} key = {lastIndex} />
         {noteItems.map((value,index) =>{console.log("AAA "+value.noteTitle);
             lastIndex = index;
-            return <li className="noteSelector" key = {index}><NotesSelector key = {index} toggleActiveNote={toggleActiveNote} title={value.noteTitle}  /></li>
+            return (
+            <li className="noteSelector" key = {index}>
+              <NotesSelector key = {index} toggleActiveNote={toggleActiveNote} title={value.noteTitle}  />
+              </li>
+            )
         })}
     </ul>
   );

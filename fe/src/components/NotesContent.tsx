@@ -1,9 +1,9 @@
-import React, {useState,useEffect} from 'react';
-
+import {useState,useEffect} from 'react';
 
 function NotesContent(props) {
-    let [title,setTitle] = useState('');
-    let [content,setContent] = useState('');
+    let [title,setTitle] = useState<string>('');
+    let [content,setContent] = useState<string>('');
+
     function saveNote(event){
         if (props.activeNote !== '')
         {
