@@ -6,16 +6,17 @@ import ContextModel from '../models/ContextModel';
 function NotesContent(props) {
     let [title,setTitle] = useState<string>('');
     let [content,setContent] = useState<string>('');
-    let controllerContext = useContext<ContextModel>(ControllersContext);
+    let controllerContext = useContext(ControllersContext);
     let activeNoteIdContext = useContext(ActiveNoteContext);
 
     function saveNote(event){
         if (activeNoteIdContext.activeNoteId !== -1)
         {
-            let noteToEdit = controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+            let noteToEdit = controllerContext.controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
             setContent(event.target.value);
             noteToEdit.noteContent = event.target.value;
-            controllerContext._noteController.saveNote(noteToEdit);
+            controllerContext.controllerContext._noteController.saveNote(noteToEdit);
+            props.useReload(!props.reload);
         }        
         else
         {
@@ -25,9 +26,10 @@ function NotesContent(props) {
 
     function editTitle(event){
         setTitle(event.target.value);
-        let noteToEdit =  controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+        let noteToEdit =  controllerContext.controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
         noteToEdit.noteTitle = event.target.value;
-        controllerContext._noteController.saveNote(noteToEdit);
+        controllerContext.controllerContext._noteController.saveNote(noteToEdit);
+        props.useReload(!props.reload);
     }
 
     function removeNote(event){
@@ -36,13 +38,13 @@ function NotesContent(props) {
             alert("No notes selected!");
             return;
         }
-        let noteToDelete = controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+        let noteToDelete = controllerContext.controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
         if (noteToDelete == null)
         {
             alert("Error: could not find note to delete!");
             return;
         }
-        controllerContext._noteController.deleteNote(noteToDelete);
+        controllerContext.controllerContext._noteController.deleteNote(noteToDelete);
         activeNoteIdContext.setActiveNoteId(-1);
         props.useReload(!props.reload);
     }
@@ -51,7 +53,7 @@ function NotesContent(props) {
         if (document.querySelector('.noteInput')!=null){
             if (activeNoteIdContext.activeNoteId !== -1)
             {
-                let note = controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
+                let note = controllerContext.controllerContext._noteController.getNoteById(activeNoteIdContext.activeNoteId);
                 if (note === null)
                 {
                     setTitle("");

@@ -5,7 +5,7 @@ import ContextModel from '../models/ContextModel';
 function AddNote(props)
 {
     let [newNoteTitle, setNewNoteTitle] = useState<string>('');
-    let controllerContext = useContext<ContextModel>(ControllersContext);
+    let controllerContext = useContext(ControllersContext);
 
     function handleInput(event)
     {
@@ -14,7 +14,7 @@ function AddNote(props)
 
     function addNewNote(event)
     {
-        let result = controllerContext._noteController.addNote(newNoteTitle);
+        let result = controllerContext.controllerContext._noteController.addNote(newNoteTitle);
         if (result === 0)
         {
             props.callback(!props.value);

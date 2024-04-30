@@ -4,7 +4,7 @@ html,body,#root{
   background:lightgray;
 }
 .App {
-  width:90%;
+  width:100%;
   margin-top:10px;
   display:flex;
   flex-direction:horizontal;
@@ -12,7 +12,49 @@ html,body,#root{
   height:100%;
   filter:drop-shadow(0px 30px 20px rgba(80,80,80,0.2));
 }
+#loginCard
+{
+  width: 50vw;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  padding:0;
+}
+#loginCard h1
+{
+  margin-bottom:0;
+  padding-bottom:0;
+}
+#loginCard h2
+{
+  margin-top:0;
+  margin-bottom: 2rem;
+}
 
+#loginCard input
+{
+  width:50%;
+  margin-bottom: 0.2rem;
+  font-size:1.2rem;
+  padding:5px;
+}
+#loginCard button
+{
+  width:50%;
+  background:lightBlue;
+  border:none;
+  padding:10px;
+  margin-top:1rem;
+  margin-bottom:1rem;
+  font-size:1.2rem;
+}
+#loginCard p
+{
+  margin:0;
+  padding:0;
+  margin-top:0.5rem;
+}
 .noteSelector{
   text-decoration:none;
   list-style-type: none;

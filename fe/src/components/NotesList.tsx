@@ -4,17 +4,16 @@ import '../style/NotesList.css';
 import AddNote from './AddNote';
 
 import NotesSelector from './NotesSelector';
-import { ActiveNoteContext, ControllersContext } from '../App';
-import ContextModel from '../models/ContextModel';
+import { ControllersContext } from '../App';
 import NoteModel from '../models/NoteModel';
 
 function NotesList(props) {
  
   let [noteItems,setNoteItems] = useState([]);
-  let controllerContext = useContext<ContextModel>(ControllersContext);
+  let controllerContext = useContext(ControllersContext);
   let lastIndex = 0;
   useEffect(() =>{
-    let items : NoteModel[] = controllerContext._noteController.getAllNotes();
+    let items : NoteModel[] = controllerContext.controllerContext._noteController.getAllNotes();
     if (items !== null)
     {
       setNoteItems(items);
@@ -23,7 +22,7 @@ function NotesList(props) {
   
   return (
     <ul className="notesList">
-        <AddNote callback={props.useReload} value = {props.reload} key = {lastIndex} />
+        <AddNote key = {lastIndex} />
         {noteItems.map((value : NoteModel,index) =>{
             lastIndex = index;
             return (
