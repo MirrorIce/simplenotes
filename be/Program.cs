@@ -24,9 +24,17 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>{
+                    options.Events.OnRedirectToAccessDenied = options.Events.OnRedirectToLogin = c =>
+                    {
+                        c.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        return Task.FromResult<object>(null);
+                    };
                     options.AccessDeniedPath = "/";
-                    options.LoginPath = "/swagger";
+                    options.LoginPath = "/";
                     options.ExpireTimeSpan = new TimeSpan(6,0,0);
+                    options.Cookie.SameSite = SameSiteMode.None;
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 });
 builder.Services.AddAuthorization(options => {
     options.FallbackPolicy = new AuthorizationPolicyBuilder()

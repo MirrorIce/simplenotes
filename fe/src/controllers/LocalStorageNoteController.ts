@@ -2,33 +2,35 @@ import { INoteController } from "../interfaces/INoteController";
 import NoteModel from "../models/NoteModel";
 
 class LocalStorageNoteController implements INoteController{ 
-    getAllNotes(): NoteModel[] {
+    getAllNotes(): Promise<NoteModel[]> {
         let simpleNotes = localStorage.getItem('simplenotes');
         let items : NoteModel[] = null;
         if (simpleNotes !== null)
         {
             items = JSON.parse(simpleNotes);
         }
-        return items;
+        return new Promise((resolve, _reject ) =>{
+            resolve(items)
+        });
     }
 
-    getNoteById(noteId: number): NoteModel {
-        let allNotes : NoteModel[] = this.getAllNotes();
+    async getNoteById(noteId: number): Promise<NoteModel> {
+        let allNotes : NoteModel[] = await this.getAllNotes();
         for (let element of allNotes)
         {
             if (element.noteId === noteId)
             {
-                return element;
+                return new Promise((resolve, _reject) => {
+                    resolve(element);
+                });
             }
         }
-        return null;
+        return new Promise((resolve, _reject) => {resolve(null)});
 
     }
-    editNote(Note: any): void {
-        throw new Error("Method not implemented.");
-    }
-    saveNote(Note: any): void {
-        let simpleNotes : NoteModel[] = this.getAllNotes();
+    
+    async saveNote(Note: any): Promise<void> {
+        let simpleNotes : NoteModel[] = await this.getAllNotes();
         if (Note == null) return;
         for (let element of simpleNotes)
         {
@@ -42,7 +44,7 @@ class LocalStorageNoteController implements INoteController{
         }
         alert("Error: note not found to be saved!");
     }
-    addNote(newNoteTitle: string): number {
+    async addNote(newNoteTitle: string): Promise<number> {
         let simpleNotes : any = localStorage.getItem('simplenotes');
         let newNote : NoteModel = new NoteModel();
         newNote.noteContent = "";
@@ -93,8 +95,8 @@ class LocalStorageNoteController implements INoteController{
         return -1;
  
     }
-    deleteNote(Note: any): void {
-        let simpleNotes = this.getAllNotes();
+    async deleteNote(Note: any): Promise<void> {
+        let simpleNotes = await this.getAllNotes();
         if (simpleNotes != null)
         {
             for (let i = 0; i < simpleNotes.length; i++)

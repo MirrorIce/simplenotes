@@ -30,26 +30,33 @@ function Login(props)
             username: username,
             password: password
         }
-        let result = await fetch("http://localhost:5055/api/User/loginbyuserpass",
-        {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                "Content-Type": "application/json"  ,
-            },
-            body: JSON.stringify(reqBody),
-        });
-        if (result.status === 200)
-        {
-            appSettingsContext._setIsUserLoggedIn(true);
-            navigate("/");
-            controllerContext.setControllerContext(new ContextModel(new APINoteController()));
+        try{
+            let result = await fetch("/api/User/loginbyuserpass",
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json"  ,
+                },
+                body: JSON.stringify(reqBody),
+            });
+            if (result.status === 200)
+            {
+                appSettingsContext._setIsUserLoggedIn(true);
+                navigate("/");
+                controllerContext.setControllerContext(new ContextModel(new APINoteController()));
+            }
+            else
+            {
+                alert("Wrong username or password!");
+            }
+            console.log(result);
         }
-        else
+        catch(e)
         {
-            alert("Wrong username or password!");
+            console.log(e);
         }
-        console.log(result);
+
     }
 
     function setLocalStorage(event)

@@ -13,11 +13,13 @@ function NotesList(props) {
   let controllerContext = useContext(ControllersContext);
   let lastIndex = 0;
   useEffect(() =>{
-    let items : NoteModel[] = controllerContext.controllerContext._noteController.getAllNotes();
-    if (items !== null)
-    {
-      setNoteItems(items);
-    }
+
+    controllerContext.controllerContext._noteController.getAllNotes().then((items) =>{
+      if (items !== null)
+      {
+        setNoteItems(items);
+      }
+    });
   },[props.reload]);
   
   return (

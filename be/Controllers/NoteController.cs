@@ -69,6 +69,31 @@ namespace SimpleNotes.Controllers{
             return Ok(noteList);
         }
 
+        [HttpGet("user/notes")]
+        public async Task<IActionResult> GetNoteListByLoggedUser()
+        {
+            Claim? userIdClaim = User.Claims.FirstOrDefault(claim => string.Equals(claim.Type, "id"));
+            if (userIdClaim == null)
+            {
+                return new ChallengeResult();
+            } 
+            int userId = -1; 
+            int.TryParse(userIdClaim.Value, out userId);
+
+            if (userId == -1)
+            {
+                return BadRequest();
+            }
+            
+            List<Note>? noteList = _noteRepository.GetNotesByUserId(userId)?.ToList();
+            if (noteList == null)
+            {
+                return NotFound("Notes not found for this user!");
+            }
+
+            return Ok(noteList);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddNoteByUserId([FromBody] Note inputNote)
         {

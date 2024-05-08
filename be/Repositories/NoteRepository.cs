@@ -2,6 +2,7 @@ using SimpleNotes.Interfaces;
 using SimpleNotes.Data;
 using SimpleNotes.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SimpleNotes.Repositories
 {
