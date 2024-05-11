@@ -1,17 +1,27 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html,body,#root{
-  height:99%;
-  --note-bg: rgb(220, 220, 220);
-  background:lightgray;
+  width:100vw;
+  height:100vh;
+  --note-bg: rgb(254, 250, 242);
+  --button-accent: #1D0707;
+  background: var(--note-bg);
+  font-family: 'Inter', serif;
 }
-.App {
-  width:100%;
-  margin-top:10px;
-  display:flex;
-  flex-direction:horizontal;
-  align-items:stretch;
-  height:100%;
-  filter:drop-shadow(0px 30px 20px rgba(80,80,80,0.2));
+@media screen and (min-width: 429px) and (max-width: 1500px) {
+  html{
+    font-size:16px;
+  } 
 }
+@media screen and (min-width: 1500px) {
+  html{
+    font-size:20px;
+  }
+}
+
 #loginCard
 {
   width: 50vw;
@@ -21,134 +31,143 @@ html,body,#root{
   align-items: center;
   padding:0;
 }
-#loginCard h1
-{
+
+#loginCard h1{
+  font-size: 6rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
   margin-bottom:0;
   padding-bottom:0;
 }
-#loginCard h2
-{
+#loginCard h2{
+  font-size: 2.25rem;
+  font-family: 'Playfair Display';
+  font-weight: 500;
+  letter-spacing: .25cap;
   margin-top:0;
   margin-bottom: 2rem;
 }
-
-#loginCard input
-{
+#loginCard input{
+  font-size: 1rem;
+  font-family: 'Inter', serif;
+  font-weight: 500;
+  background: none;
+  border:1px solid black;
+  border-radius: 3px;
   width:50%;
   margin-bottom: 0.2rem;
-  font-size:1.2rem;
   padding:5px;
 }
-#loginCard button
-{
-  width:50%;
-  background:lightBlue;
+#loginCard input:focus{
+  border: 2px solid black;
+  outline:none;
+  transition:all .1s ease;
+}
+#loginCard button{
+  font-size: 1.5rem;  
+  font-family: 'Inter', serif;
+  font-weight: 400;
+  background: var(--button-accent);
+  color:white; 
+  border: 1px solid black;
+  width:25vw;
   border:none;
   padding:10px;
   margin-top:1rem;
   margin-bottom:1rem;
-  font-size:1.2rem;
 }
-#loginCard p
-{
+#loginCard p{
+  font-size: 1rem;
+  font-family: 'Inter', serif;
+  font-weight: 400;
   margin:0;
   padding:0;
   margin-top:0.5rem;
 }
+.App {
+  display:flex;
+  flex-direction:horizontal;
+  align-items:stretch;
+  filter:drop-shadow(0px 30px 20px rgba(80,80,80,0.2));
+  height:100%;
+}
+
 .noteSelector{
   text-decoration:none;
   list-style-type: none;
-  margin-top:1px;
 }
 
 .noteSelector div{
-  text-align:right;
-  border-top:3px solid #52cb1f;
-  background:var(--note-bg);
-  padding:5px;
-  width:fit-content;
+  /* background:var(--note-bg); */
+  background: rgb(244, 240, 232);
+  padding:10px;
   min-width:60px;
-  margin-right:0;
-  margin-left:auto;
-  border-radius:5px 0px 0px 5px;
-  border-right:1px inset lightgray;
+  margin: 0;
+  box-shadow:inset -8px 0px 5px rgba(80,80,80,0.2);
+  border-bottom:0.5px solid rgba(80,80,80,0.5);
 }
 
 .noteSelector .active{
-  background:lightgray;
-  box-shadow: 0px 10px 20px 0px rgba(0, 70, 6, 0.4);
-  margin-bottom:10px;
-  margin-top:5px;
+  background:var(--note-bg);
   transition:.2s ease all;
-  border:none;
+  box-shadow:none;
 }
-
 .addButton{
-  text-align:right;
-  margin-right:0;
-  margin-left:auto;
-  min-width:110px;
+  display:flex;
+  border-bottom: 1px solid var(--button-accent);
 }
 .addButton input{
-  width:10px;
   padding:10px;
   border-radius:5px 0px 0px 5px;
-  border:1px solid green;
-  border-right:none;
-  margin-top:5px;
+  border:none;
   background:var(--note-bg);
   outline:none;
   transition:.4s ease width;
+  font-size:1.2rem;
 }
 
 .addButton input:focus{
-  width:60px;
 }
 
 .addButton button{
   padding:10px;
+  font-size:1.5rem;
   padding-right:15px;
   border:none;
-  border:1px solid green;
   border-left:none;
   background:var(--note-bg);
-  width:20px;
   transition:.2s ease background;
 }
 
 .addButton button:hover{
-  background:green;
-}
-
-.notesList{ 
-  padding:0;
-  flex-basis: 1;
-  flex-grow: 1;
-  margin-top:40px;
-}
-
-.notesContent{
-  flex-basis:1;
-  flex-grow:10;
-}
-
-.notesContent .deleteButton{
-  padding:10px;
-  background:var(--note-bg);
-  border-radius:0px 15px 0px 0px;
-  transition:.2s ease all;
-}
-.deleteButton{
-  border:1px solid red;
-}
-.notesContent .deleteButton:hover{
-  background:red;
+  background: var(--button-accent);
   color:white;
 }
 
+.notesList{ 
+  padding:0px;
+}
+
+.notesContent{
+  height:100%;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+}
+
+.notesContent .deleteButton{
+  transition:.2s ease all;
+}
+.deleteButton{
+  border:none;
+}
+.notesContent .deleteButton:hover{
+  background:red;
+}
+
 .notesContent textarea{
-  width:99%;
-  height:89vh;
+  width:100%;
+  font-family: "Inter", serif
 }
 
 .notesContent input, .notesContent textarea{
@@ -156,10 +175,18 @@ html,body,#root{
   border:none;
   outline:none;
 }
-
-.notesContent input{
-  background:var(--note-bg);
-  border-radius:15px 0px 0px 0px;
+.notesContent div{
+  flex-basis:1;
+  flex-grow:1;
+  margin:0;
+  padding:0;
+}
+.notesContent input, .notesContent button{
+  background: var(--note-bg);
+  height:100%;
+  min-width:60px;
+  font-size:1.2rem;
+  border-bottom:1px solid var(--button-accent);
 }
 
 .notesContent input:active{
@@ -167,11 +194,11 @@ html,body,#root{
 }
 
 .notesContent textarea{
-  border-radius:0px 25px 25px 10px;
-  border-top:1px solid green;
-  border-bottom:1px solid green;
   background:var(--note-bg);
   resize:none;
+  flex-grow:99;
+  flex-basis: 99;
+  font-size: 0.9rem;
 }
 
 

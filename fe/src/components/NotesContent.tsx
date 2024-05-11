@@ -109,9 +109,11 @@ function NotesContent(props) {
     
     return (
         <div className = 'notesContent'>
-            <input onChange={editTitle} type="text" value={title}></input>
-            <button className="deleteButton" onClick={removeNote} >X</button>
-            {(activeNoteIdContext.activeNoteId !== -1)&&<textarea className='noteInput' onChange={editNoteContents} value={content}></textarea>}
+            <div>
+                <input onChange={editTitle} type="text" value={title}></input>
+                <button className="deleteButton" onClick={removeNote} >X</button>
+            </div>
+            {<textarea className='noteInput' onChange={editNoteContents} value={content}></textarea>}
         </div>
     )
 }
