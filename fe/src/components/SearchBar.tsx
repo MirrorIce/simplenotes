@@ -62,6 +62,7 @@ function SearchBar(props) {
         setContentResult(null);
         setBarText("");
         setSearchTick(0);
+        setShowAllNotes(true);
     }
     useInterval(() => {
         if (currentTick === searchTick && currentTick !== 0) {
@@ -70,8 +71,8 @@ function SearchBar(props) {
         setCurrentTick(currentTick + 1);
     }, 500);
     return (
-        <div>
-            <input type="text" onChange={updateText}>
+        <div className = "searchBar">
+            <input placeholder = "Search notes" type="text" onChange={updateText} value={barText}>
             </input>
             {
                 titleResult != null &&
@@ -91,8 +92,8 @@ function SearchBar(props) {
                                 }
                             </ul>
                             :
-                            <p>
-                                No results found!
+                            <p className="noResultsText">
+                            &emsp;No results found!
                             </p>
                     }
                 </div>
@@ -115,8 +116,8 @@ function SearchBar(props) {
                             }
                         </ul>
                         :
-                        <p>
-                            No results found!
+                        <p className="noResultsText">
+                            &emsp;No results found!
                         </p>
                     }
                 </div>

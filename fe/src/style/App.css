@@ -127,8 +127,11 @@ body,
   display: flex;
   border-bottom: 1px solid var(--button-accent);
 }
+.searchBar {
+  border-bottom: 1px solid var(--button-accent);
+}
 
-.addButton input {
+.addButton input, .searchBar input {
   padding: 10px;
   border-radius: 5px 0px 0px 5px;
   border: none;
@@ -136,6 +139,22 @@ body,
   outline: none;
   transition: .4s ease width;
   font-size: 1.2rem;
+}
+
+.searchBar input {
+  width:100%;
+}
+
+.searchBar p{
+  font-size: 1rem;
+  padding: 10px;
+  border:none;
+  color: var(--button-accent);
+  font-weight: 600;
+}
+
+.searchBar p.noResultsText{
+  font-weight: 400;
 }
 
 .addButton button {
