@@ -8,16 +8,13 @@ function NotesSelector(props){
     function toggleActiveNote(event)
     {
         activeNoteContext.setActiveNoteId(props.noteId);
-        let removeActive = document.querySelector('.active');
-        if (removeActive !== null)
-        {
-            removeActive.setAttribute('class','');
-        }
-        event.target.setAttribute('class','active');
     }
 
     return (
-     <div className = "noteName" onClick = {toggleActiveNote} key = {props.title}>
+     <div className = { 
+                        `noteName ${activeNoteContext.activeNoteId === props.noteId ? "active" : ""}`
+                      } 
+                      onClick = {toggleActiveNote} key = {props.title}>
        {props.title}
      </div>
     )
