@@ -37,7 +37,7 @@ function SearchBar(props) {
             let processedResult: NoteModel[] = [];
             for (let noteModel of result) {
                 let noteIndex = noteModel.noteContent.toLowerCase().indexOf(barText.toLowerCase());
-                let auxContent = noteModel.noteContent;
+                let auxContent = noteModel.noteContent.toLowerCase();
                 while (noteIndex !== -1) {
                     let partialContentNote = new NoteModel();
                     partialContentNote.noteId = noteModel.noteId;
