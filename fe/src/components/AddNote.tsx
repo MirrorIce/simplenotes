@@ -23,7 +23,7 @@ function AddNote(props)
 
     return(
             <div className = "addButton">
-                <input type = 'text' placeholder = "New note title" onChange = {handleInput} />
+                <input type = 'text' placeholder = "Add a new note" onChange = {handleInput} />
                 <button  onClick = {addNewNote}>+</button>
             </div>
     )

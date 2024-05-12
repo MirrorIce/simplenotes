@@ -4,7 +4,7 @@ import { AppSettingsContext } from "../App";
 
 
 function PrivateRoute({children} : RouteProps) : JSX.Element
-{;
+{
     let appSettingsContext = useContext(AppSettingsContext);
     return(
         <>
