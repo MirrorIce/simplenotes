@@ -68,7 +68,7 @@ function SearchBar(props) {
             searchNote();
         }
         setCurrentTick(currentTick + 1);
-    }, 1000);
+    }, 500);
     return (
         <div>
             <input type="text" onChange={updateText}>
