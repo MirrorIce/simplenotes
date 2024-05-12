@@ -97,11 +97,9 @@ class LocalStorageNoteController implements INoteController {
         let allNotes = await this.getAllNotes();
         let result = [];
 
-        for (let note of allNotes)
-        {
+        for (let note of allNotes) {
             let lowerCaseNote = note.noteTitle.toLowerCase();
-            if (lowerCaseNote.includes(queryText.toLowerCase()))
-            {
+            if (lowerCaseNote.includes(queryText.toLowerCase())) {
                 result.push(note);
             }
         }
@@ -114,15 +112,13 @@ class LocalStorageNoteController implements INoteController {
         let allNotes = await this.getAllNotes();
         let result = [];
 
-        for (let note of allNotes)
-        {
-            if (note.noteContent.toLowerCase().includes(queryText.toLowerCase()))
-            {
+        for (let note of allNotes) {
+            if (note.noteContent.toLowerCase().includes(queryText.toLowerCase())) {
                 result.push(note);
             }
         }
 
-        return new Promise((resolve, _reject) =>{
+        return new Promise((resolve, _reject) => {
             resolve(result);
         })
     }

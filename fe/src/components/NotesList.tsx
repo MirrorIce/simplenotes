@@ -25,7 +25,7 @@ function NotesList(props) {
   return (
     <ul className="notesList">
       <AddNote key={lastIndex} />
-      <SearchBar setShowAllNotes = {setShowAllNotes} />
+      <SearchBar setShowAllNotes={setShowAllNotes} />
       {
         showAllNotes === true ? noteItems.map((value: NoteModel, index) => {
           lastIndex = index;
@@ -35,8 +35,8 @@ function NotesList(props) {
             </li>
           )
         })
-        :
-        ""
+          :
+          ""
       }
     </ul>
   );

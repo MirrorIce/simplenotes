@@ -10,7 +10,6 @@ function SearchBar(props) {
     let [barText, setBarText] = useState("");
     let [currentTick, setCurrentTick] = useState(0);
     let [searchTick, setSearchTick] = useState(0);
-    let [showSearchResult, setShowSearchResult] = useState(false);
     let [titleResult, setTitleResult] = useState(null);
     let [contentResult, setContentResult] = useState(null);
     const { setShowAllNotes } = props;
@@ -71,8 +70,8 @@ function SearchBar(props) {
         setCurrentTick(currentTick + 1);
     }, 500);
     return (
-        <div className = "searchBar">
-            <input placeholder = "Search notes" type="text" onChange={updateText} value={barText}>
+        <div className="searchBar">
+            <input placeholder="Search notes" type="text" onChange={updateText} value={barText}>
             </input>
             {
                 titleResult != null &&
@@ -93,7 +92,7 @@ function SearchBar(props) {
                             </ul>
                             :
                             <p className="noResultsText">
-                            &emsp;No results found!
+                                &emsp;No results found!
                             </p>
                     }
                 </div>
@@ -104,21 +103,21 @@ function SearchBar(props) {
                     <p>Content result</p>
                     {
                         contentResult.length > 0 ?
-                        <ul>
-                            {
-                                contentResult.map((value: NoteModel, index) => {
-                                    return (
-                                        <li className="noteSelector" key={index} onClick={clearState}>
-                                            <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteContent}></NotesSelector>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                        :
-                        <p className="noResultsText">
-                            &emsp;No results found!
-                        </p>
+                            <ul>
+                                {
+                                    contentResult.map((value: NoteModel, index) => {
+                                        return (
+                                            <li className="noteSelector" key={index} onClick={clearState}>
+                                                <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteContent}></NotesSelector>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                            :
+                            <p className="noResultsText">
+                                &emsp;No results found!
+                            </p>
                     }
                 </div>
             }

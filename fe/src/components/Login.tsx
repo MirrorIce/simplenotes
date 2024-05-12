@@ -5,62 +5,54 @@ import LocalStorageNoteController from "../controllers/LocalStorageNoteControlle
 import { APINoteController } from "../controllers/APINoteController";
 import ContextModel from "../models/ContextModel";
 
-function Login(props)
-{
+function Login(props) {
     let [username, setUserName] = useState('');
     let [password, setPassword] = useState('');
     let appSettingsContext = useContext(AppSettingsContext);
-    let controllerContext  = useContext(ControllersContext);
+    let controllerContext = useContext(ControllersContext);
     const navigate = useNavigate();
-    
-    function updateUsername(event)
-    {
+
+    function updateUsername(event) {
         setUserName(event.target.value);
     }
 
-    function updatePassword(event)
-    {
+    function updatePassword(event) {
         setPassword(event.target.value);
     }
 
-    async function tryLogin(event)
-    {
+    async function tryLogin(event) {
         event.preventDefault();
         let reqBody = {
             username: username,
             password: password
         }
-        try{
+        try {
             let result = await fetch("/api/User/loginbyuserpass",
-            {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    "Content-Type": "application/json"  ,
-                },
-                body: JSON.stringify(reqBody),
-            });
-            if (result.status === 200)
-            {
+                {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(reqBody),
+                });
+            if (result.status === 200) {
                 appSettingsContext._setIsUserLoggedIn(true);
                 navigate("/");
                 controllerContext.setControllerContext(new ContextModel(new APINoteController()));
             }
-            else
-            {
+            else {
                 alert("Wrong username or password!");
             }
             console.log(result);
         }
-        catch(e)
-        {
+        catch (e) {
             console.log(e);
         }
 
     }
 
-    function setLocalStorage(event)
-    {
+    function setLocalStorage(event) {
         event.preventDefault();
         appSettingsContext._setIsLocalStorage(true);
         controllerContext.setControllerContext(new ContextModel(new LocalStorageNoteController()));
@@ -68,18 +60,18 @@ function Login(props)
     }
 
     return (
-        <div id = "loginCard">
+        <div id="loginCard">
             <h1>
                 Simple Notes
             </h1>
             <h2>
                 Jotting made simple
             </h2>
-            <input onChange = {updateUsername} type = "text" placeholder = "Username"></input>
-            <input onChange = {updatePassword} type = "password" placeholder = "Password"></input>
-            <button onClick = {tryLogin}>Login</button>
+            <input onChange={updateUsername} type="text" placeholder="Username"></input>
+            <input onChange={updatePassword} type="password" placeholder="Password"></input>
+            <button onClick={tryLogin}>Login</button>
             <p>No account? Create one!</p>
-            <p onClick = {setLocalStorage}>Save your data with no account!</p>
+            <p onClick={setLocalStorage}>Save your data with no account!</p>
         </div>
     );
 }

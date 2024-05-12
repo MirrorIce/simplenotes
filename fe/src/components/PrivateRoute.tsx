@@ -3,14 +3,13 @@ import { Navigate, RouteProps } from "react-router-dom";
 import { AppSettingsContext } from "../App";
 
 
-function PrivateRoute({children} : RouteProps) : JSX.Element
-{
+function PrivateRoute({ children }: RouteProps): JSX.Element {
     let appSettingsContext = useContext(AppSettingsContext);
-    return(
+    return (
         <>
-        {
-            appSettingsContext._isUserLoggedIn || appSettingsContext._isLocalStorage ? children : <Navigate to="/login"/>
-        }
+            {
+                appSettingsContext._isUserLoggedIn || appSettingsContext._isLocalStorage ? children : <Navigate to="/login" />
+            }
         </>
     );
 }

@@ -1,11 +1,10 @@
 import { INoteController } from "../interfaces/INoteController";
 
-class ContextModel{
-    
+class ContextModel {
+
     _noteController: INoteController;
 
-    constructor(noteController : INoteController)
-    {
+    constructor(noteController: INoteController) {
         this._noteController = noteController
     }
 }

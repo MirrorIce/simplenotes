@@ -76,15 +76,65 @@ class APINoteController implements INoteController {
         return -1;
 
     }
+
     async deleteNote(Note: any): Promise<void> {
-        throw new Error("Method not implemented.");
+        if (Note == null) return;
+
+        let result = await fetch(this.URI + `api/Note`, {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(Note),
+            credentials: "include"
+        });
+
+        if (result.status !== 200) {
+            result.json().then((res) =>{
+                console.log(res);
+            })
+            alert("Could not delete note!");
+        }
+
+        return new Promise((resolve, reject) =>{
+            resolve();
+        })
     }
 
-    searchNoteTitleByText(queryText: string): Promise<NoteModel[]> {
-        throw new Error("Method not implemented.");
+    async searchNoteTitleByText(queryText: string): Promise<NoteModel[]> {
+        if (queryText == null) {
+            alert("An error occured!");
+            return null;
+        }
+
+        let result = await fetch(this.URI + `api/Note/noteByTitle?title=${queryText}`);
+        if (result.status !== 200) {
+            console.log(result.body);
+            alert("An error occured!");
+        }
+
+        let output: NoteModel[] = await result.json();
+        return new Promise((resolve, _reject) => {
+            resolve(output);
+        })
     }
-    searchNoteContentByText(queryText: string): Promise<NoteModel[]> {
-        throw new Error("Method not implemented.");
+    async searchNoteContentByText(queryText: string): Promise<NoteModel[]> {
+        if (queryText == null) {
+            alert("An error occured!");
+            return null;
+        }
+
+        let result = await fetch(this.URI + `api/Note/noteByContent?content=${queryText}`);
+        if (result.status !== 200) {
+            console.log(result.body);
+            alert("An error occured!");
+        }
+
+        let output: NoteModel[] = await result.json();
+        return new Promise((resolve, _reject) => {
+            resolve(output);
+        })
     }
 }
 
