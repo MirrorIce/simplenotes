@@ -7,6 +7,7 @@ function NotesSelector(props) {
 
     function toggleActiveNote(event) {
         activeNoteContext.setActiveNoteId(props.noteId);
+        props.handleMenu();
     }
 
     return (

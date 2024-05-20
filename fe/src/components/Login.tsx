@@ -64,6 +64,7 @@ function Login(props) {
             <h1>
                 Simple Notes
             </h1>
+            <img src="/favicon.svg" alt="logo" />
             <h2>
                 Jotting made simple
             </h2>

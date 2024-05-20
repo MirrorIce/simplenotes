@@ -15,18 +15,6 @@ body,
   font-family: 'Inter', serif;
 }
 
-@media screen and (min-width: 429px) and (max-width: 1500px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-@media screen and (min-width: 1500px) {
-  html {
-    font-size: 20px;
-  }
-}
-
 #loginCard {
   width: 50vw;
   margin: auto;
@@ -42,6 +30,7 @@ body,
   font-weight: 600;
   margin-bottom: 0;
   padding-bottom: 0;
+  text-align: center;
 }
 
 #loginCard h2 {
@@ -51,6 +40,7 @@ body,
   letter-spacing: .25cap;
   margin-top: 0;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 #loginCard input {
@@ -96,19 +86,28 @@ body,
 
 .App {
   display: flex;
-  flex-direction: horizontal;
+  flex-direction: row;
   align-items: stretch;
   filter: drop-shadow(0px 30px 20px rgba(80, 80, 80, 0.2));
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
 }
 
 .noteSelector {
   text-decoration: none;
   list-style-type: none;
+  font-weight: 600;
 }
 
 .noteSelector div {
-  /* background:var(--note-bg); */
   background: rgb(244, 240, 232);
   padding: 10px;
   min-width: 60px;
@@ -124,8 +123,6 @@ body,
 }
 
 .addButton {
-  flex-basis: 1;
-  flex-grow: 1;
   display: flex;
   border-bottom: 1px solid var(--button-accent);
 }
@@ -134,10 +131,18 @@ body,
   border-bottom: 1px solid var(--button-accent);
 }
 
+.deleteContainer .deleteButton {
+  padding: 0;
+}
+
+
+
 .addButton input,
-.searchBar input {
+.searchBar input,
+.deleteContainer input {
+  flex-grow: 1;
   padding: 10px;
-  border-radius: 5px 0px 0px 5px;
+  height: 100%;
   border: none;
   background: var(--note-bg);
   outline: none;
@@ -161,19 +166,21 @@ body,
   font-weight: 400;
 }
 
-.addButton button {
-  padding: 10px;
-  font-size: 1.5rem;
-  padding-right: 15px;
-  border: none;
-  border-left: none;
-  background: var(--note-bg);
-  transition: .2s ease background;
+.addButton i {
+  width: 2.2rem;
+  display: inline-block;
+  content: "";
 }
 
-.addButton button:hover {
-  background: var(--button-accent);
-  color: white;
+.addButton i:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: var(--note-bg);
+  background-image: url("../../public/add.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: inline-block;
 }
 
 .notesList {
@@ -187,21 +194,31 @@ body,
   flex-direction: column;
 }
 
-.notesContent .deleteButton {
-  transition: .2s ease all;
-}
-
 .deleteButton {
+  width: 2.2rem;
+  margin: 0;
+  display: inline-block;
+  content: "";
   border: none;
+  min-width: 24px;
 }
 
-.notesContent .deleteButton:hover {
-  background: red;
+.deleteButton:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: var(--note-bg);
+  background-image: url("../../public/trash.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: inline-block;
 }
 
 .notesContent textarea {
   width: 100%;
-  font-family: "Inter", serif
+  height: 100%;
+  font-family: "Inter", serif;
 }
 
 .notesContent input,
@@ -209,13 +226,6 @@ body,
   padding: 10px;
   border: none;
   outline: none;
-}
-
-.notesContent div {
-  flex-basis: 1;
-  flex-grow: 1;
-  margin: 0;
-  padding: 0;
 }
 
 .notesContent input,
@@ -234,7 +244,148 @@ body,
 .notesContent textarea {
   background: var(--note-bg);
   resize: none;
-  flex-grow: 99;
-  flex-basis: 99;
   font-size: 0.9rem;
+}
+
+.burgerButton {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 14px;
+    background: var(--note-bg);
+  }
+
+  #loginCard {
+    width: 100vw;
+  }
+
+  #loginCard h1 {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+
+  #loginCard img {
+    width: 25%;
+    margin-top: 25vh;
+  }
+
+  #loginCard h2 {
+    font-size: 1.75rem;
+  }
+
+  #loginCard button {
+    width: 50%;
+  }
+
+  .App {
+    flex-direction: column;
+    height: fit-content;
+    filter: none;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .burgerButton {
+    position: fixed;
+    display: inline;
+    width: 1.4rem;
+    height: 1.4rem;
+    top: 1rem;
+    left: 1rem;
+    z-index: 4;
+  }
+
+  .notesList {
+    position: absolute;
+    z-index: 0;
+    height: 100vh;
+    width: 100%;
+    background: var(--note-bg);
+  }
+
+  .notesList {
+    margin-left: 10%;
+    width:87%;
+  }
+
+  .notesList div {
+    width:100%;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .notesContent textarea {
+    margin-left: 10%;
+    width:87%;
+    padding-left: 0;
+  }
+
+  .addButton input,
+  .searchBar input,
+  .deleteContainer input {
+    padding-left: 0;
+    border:none;
+  }
+
+  .showMenu {
+    z-index: 2;
+  }
+
+  .addButton,
+  .searchBar,
+  .deleteContainer {
+    width: 87%;
+  }
+
+  .deleteContainer {
+    display:flex;
+    margin-left: 10%;
+    border-bottom: 1px solid var(--button-accent);
+  }
+
+  .searchBar {
+    border-bottom: 1px solid var(--button-accent);
+  }
+
+
+  .notesContent {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+  }
+
+}
+
+@media screen and (min-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+
+  #loginCard h1 {
+    font-size: 5rem;
+  }
+
+  #loginCard img {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  html {
+    font-size: 20px;
+  }
 }

@@ -58,12 +58,13 @@ function NotesContent(props) {
         noteToDelete.noteContent = "";
         noteToDelete.noteTitle = "";
 
-        controllerContext.controllerContext._noteController.deleteNote(noteToDelete).then(()=>{
+        controllerContext.controllerContext._noteController.deleteNote(noteToDelete).then(() => {
         });
-        
+
         activeNoteIdContext.setActiveNoteId(-1);
         props.useReload(!props.reload);
         previousActiveId.current = -1;
+        props.handleMenu();
     }
 
     useEffect(() => {
@@ -102,7 +103,7 @@ function NotesContent(props) {
         <div className='notesContent'>
             <div className='deleteContainer'>
                 <input onChange={editTitle} type="text" value={title}></input>
-                <button className="deleteButton" onClick={removeNote} >X</button>
+                <i className="deleteButton" onClick={removeNote} />
             </div>
             {<textarea className='noteInput' onChange={editNoteContents} value={content}></textarea>}
         </div>

@@ -20,9 +20,15 @@ function App() {
   const [isLocalStorage, setIsLocalStorage] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
 
 
   const [controllerContext, setControllerContext] = useState(new ContextModel(new LocalStorageNoteController()));
+  
+  function handleMenu(event){
+    setShowMenu(!showMenu);
+  }
+  
   return (
     <div className="App">
       <AppSettingsContext.Provider value={new AppSettingsModel(isLocalStorage, setIsLocalStorage, isUserLoggedIn, setIsUserLoggedIn, isDarkMode, setIsDarkMode)}>
@@ -33,8 +39,11 @@ function App() {
               element={
                 <PrivateRoute>
                   <ActiveNoteContext.Provider value={{ activeNoteId, setActiveNoteId }}>
-                    <NotesList useReload={useReload} reload={reload} className="notesList" setActiveNote={setActiveNote} />
-                    <NotesContent useReload={useReload} reload={reload} className="notesContent" activeNote={activeNote} setActiveNote={setActiveNote} />
+                    <div className = "container">
+                      <img src = {showMenu === false ? "/menu-burger.svg" : "/cross.svg"} alt = "mobile menu button" className="burgerButton" onClick={handleMenu}/>
+                      <NotesList useReload={useReload} reload={reload} className={`notesList ${showMenu === true ? "showMenu" : ""}`} setActiveNote={setActiveNote} handleMenu = {handleMenu}/>
+                      <NotesContent useReload={useReload} reload={reload} className="notesContent" activeNote={activeNote} setActiveNote={setActiveNote} handleMenu = {handleMenu}/>
+                    </div>
                   </ActiveNoteContext.Provider>
                 </PrivateRoute>
               }

@@ -23,15 +23,15 @@ function NotesList(props) {
   }, [props.reload]);
 
   return (
-    <ul className="notesList">
+    <ul className={props.className}>
       <AddNote key={lastIndex} />
-      <SearchBar setShowAllNotes={setShowAllNotes} />
+      <SearchBar setShowAllNotes={setShowAllNotes} handleMenu={props.handleMenu} />
       {
         showAllNotes === true ? noteItems.map((value: NoteModel, index) => {
           lastIndex = index;
           return (
             <li className="noteSelector" key={index}>
-              <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteTitle} />
+              <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteTitle} handleMenu={props.handleMenu} />
             </li>
           )
         })

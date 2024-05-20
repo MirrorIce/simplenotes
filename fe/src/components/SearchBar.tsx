@@ -12,20 +12,19 @@ function SearchBar(props) {
     let [searchTick, setSearchTick] = useState(0);
     let [titleResult, setTitleResult] = useState(null);
     let [contentResult, setContentResult] = useState(null);
-    const { setShowAllNotes } = props;
     let controllerContext = useContext(ControllersContext);
 
     function updateText(event) {
         setBarText(event.target.value);
         if (event.target.value !== "") {
             setSearchTick(currentTick + 1);
-            setShowAllNotes(false);
+            props.setShowAllNotes(false);
         }
         else {
             setTitleResult(null);
             setContentResult(null);
             setSearchTick(0);
-            setShowAllNotes(true);
+            props.setShowAllNotes(true);
         }
     }
     function searchNote() {
@@ -61,7 +60,7 @@ function SearchBar(props) {
         setContentResult(null);
         setBarText("");
         setSearchTick(0);
-        setShowAllNotes(true);
+        props.setShowAllNotes(true);
     }
     useInterval(() => {
         if (currentTick === searchTick && currentTick !== 0) {
@@ -84,7 +83,7 @@ function SearchBar(props) {
                                     titleResult.map((value: NoteModel, index) => {
                                         return (
                                             <li className="noteSelector" key={index} onClick={clearState}>
-                                                <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteTitle}></NotesSelector>
+                                                <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteTitle} handleMenu={props.handleMenu}></NotesSelector>
                                             </li>
                                         );
                                     })
@@ -108,7 +107,7 @@ function SearchBar(props) {
                                     contentResult.map((value: NoteModel, index) => {
                                         return (
                                             <li className="noteSelector" key={index} onClick={clearState}>
-                                                <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteContent}></NotesSelector>
+                                                <NotesSelector key={value.noteId} noteId={value.noteId} title={value.noteContent} handleMenu={"XXX"}></NotesSelector>
                                             </li>
                                         )
                                     })
