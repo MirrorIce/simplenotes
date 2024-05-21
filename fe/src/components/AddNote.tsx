@@ -10,10 +10,11 @@ function AddNote(props) {
         setNewNoteTitle(event.target.value);
     }
 
-    function addNewNote(event) {
-        let result = controllerContext.controllerContext._noteController.addNote(newNoteTitle);
+    async function addNewNote(event) {
+        let result = await controllerContext.controllerContext._noteController.addNote(newNoteTitle);
         if (result === 0) {
-            props.callback(!props.value);
+            props.useReload(!props.reload);
+            alert("Note added!");
         }
     }
 

@@ -196,6 +196,7 @@ body,
 
 .deleteButton {
   width: 2.2rem;
+  height:100%;
   margin: 0;
   display: inline-block;
   content: "";

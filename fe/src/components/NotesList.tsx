@@ -24,7 +24,7 @@ function NotesList(props) {
 
   return (
     <ul className={props.className}>
-      <AddNote key={lastIndex} />
+      <AddNote key={lastIndex} useReload = {props.useReload} reload = {props.reload} />
       <SearchBar setShowAllNotes={setShowAllNotes} handleMenu={props.handleMenu} />
       {
         showAllNotes === true ? noteItems.map((value: NoteModel, index) => {

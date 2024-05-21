@@ -59,6 +59,7 @@ function NotesContent(props) {
         noteToDelete.noteTitle = "";
 
         controllerContext.controllerContext._noteController.deleteNote(noteToDelete).then(() => {
+            alert("Note deleted!");
         });
 
         activeNoteIdContext.setActiveNoteId(-1);
